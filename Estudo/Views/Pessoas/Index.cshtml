@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Estudo.Models.PessoasViewModel>
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using NonFactors.Mvc.Grid;
+
+@{
+	ViewData["Title"] = "Pessoas";
+	Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+	var employee = Model.FirstOrDefault();
+}
+
+<h4>Pessoas</h4>
+<hr />
+
+<div class="row">
+	
+	<div class="col-12">
+		<div class="container">
+			<div class="text-center">
+				@(Html
+					.Grid(Model)
+					.Build(columns =>
+					{
+						columns.Add(model => model.Codigo).Titled("Codigo");
+						columns.Add(model => model.Nome).Titled("Nome");
+						columns.Add(model => model.Status).Titled("Status");
+						columns.Add((model) => Html.ActionLink("", "Cadastrar", new { id = model.Codigo }, new{ @class = " fas fa-edit", style="color: #75849f; " }));
+						columns.Add((model) => Html.ActionLink("", "Excluir", new { id = model.Codigo }, new { @class = " fa fa-minus", style="color: #75849f; " }));
+
+					})
+					.Filterable(GridFilterCase.Lower)
+					.Using(GridFilterMode.Excel)
+					.Empty("Nenhum resultado encontrado!")
+					.Pageable(pager =>
+					{
+						pager.RowsPerPage = 15;
+					})
+					.Sortable()
+					)
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="row">
+	
+	<div class="col-12">
+		<div class="container">
+			<div class="text-right">
+
+				<input type="button" value="Novo" class="btn btn-dark" onclick="Novo();" />
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script src="~/js/mvc-grid.js"></script>
+<script>
+	document.querySelectorAll(".mvc-grid").forEach(element => new MvcGrid(element));
+</script>
+
+<script>
+	function Novo() {
+		window.location = window.origin + "\\Pessoas\\Cadastrar";
+	}
+</script>

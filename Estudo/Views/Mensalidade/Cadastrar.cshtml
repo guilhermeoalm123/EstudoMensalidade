@@ -1,0 +1,62 @@
+﻿@model Estudo.Models.MensalidadeViewModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using NonFactors.Mvc.Grid;
+@{
+	ViewData["Title"] = "Cadastro de Mensalidade";
+	Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+	var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
+}
+
+<h4>Cadastro de Mensalidade</h4>
+<hr />
+
+<div class="container">
+	<div class="col-2"></div>
+	<div class="col-8">
+		<form id="Pessoas" method="post" action="Cadastrar">
+
+			<div class="row">
+				<div class="form-group">
+					<label>Código:</label>
+					<input type="text" asp-for="Codigo" disabled class="form-control" />
+					<input type="hidden" asp-for="Codigo" class="form-control" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Descrição:</label>
+					<span asp-validation-for="Descricao" class="text-danger"></span>
+					<input type="text" asp-for="Descricao" class="form-control" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Valor:</label>
+					<input type="text" asp-for="Valor" class="form-control" />
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="container text-right ">
+				<input type="submit" value="Salvar" class="btn btn-dark" />
+				<input type="button" value="Excluir" class="btn btn-dark" onclick="Excluir(@Model.Codigo)" @disabled />
+				<input type="button" value="Voltar" class="btn btn-dark" onclick="Voltar()" />
+			</div>
+
+		</form>
+	</div>
+	<div class="col-2"></div>
+</div>
+
+<script>
+	function Excluir(Codigo) {
+		window.location = window.origin + "\\Mensalidade\\Excluir\\" + Codigo;
+	}
+
+	function Voltar() {
+		window.location = window.origin + "\\Mensalidade";
+	}
+</script>
