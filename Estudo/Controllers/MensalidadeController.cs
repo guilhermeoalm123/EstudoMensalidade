@@ -1,4 +1,5 @@
-﻿using Estudo.Models;
+﻿using Aplicacao.Enums;
+using Estudo.Models;
 using Estudo.Servico.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,9 +39,11 @@ namespace Aplicacao.Controllers
             } 
             else
             {
-                return View(mensalidadeVm);
+				ViewBag.Alert = Servico.CommonServices.ShowAlert(Alerts.Danger, "Verifique os campos obrigatórios");
+				return View(mensalidadeVm);
             }
 
+			ViewBag.Alert = Servico.CommonServices.ShowAlert(Alerts.Success, "Salvo com sucesso");
 			return RedirectToAction("Index");
 
 		}

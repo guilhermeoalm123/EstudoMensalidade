@@ -21,7 +21,9 @@ namespace Estudo.Servico
             {
                 Codigo = pessoasViewModel.Codigo,
                 Nome = pessoasViewModel.Nome,
-                Status = pessoasViewModel.Status
+				Cpf = pessoasViewModel.Cpf,
+				Status = pessoasViewModel.Status,
+                DataCriacao = DateTime.Now
             };
 
             ServicoPessoas.Cadastrar(pessoas);
@@ -36,7 +38,9 @@ namespace Estudo.Servico
             {
                 Codigo = registro.Codigo,
                 Nome = registro.Nome,
-                Status = registro.Status
+				Cpf = registro.Cpf,
+				Status = registro.Status,
+                DataCriacao = registro.DataCriacao
             };
 
             return pessoas;
@@ -60,7 +64,9 @@ namespace Estudo.Servico
                 {
                     Codigo = item.Codigo,
                     Nome = item.Nome,
-                    Status = item.Status
+                    Cpf = item.Cpf,
+                    Status = item.Status,
+                    DataCriacao = item.DataCriacao
                 };
 
                 listaPessoas.Add(pessoas);

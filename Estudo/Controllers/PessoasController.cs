@@ -1,10 +1,7 @@
-﻿using Dominio.Entidades;
-using Dominio.Servicos.Pessoas;
-using Estudo.Models;
-using Estudo.Servico;
+﻿using Estudo.Models;
 using Estudo.Servico.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
+using Aplicacao.Enums;
 
 namespace Aplicacao.Controllers
 {
@@ -38,16 +35,21 @@ namespace Aplicacao.Controllers
         {
             if (ModelState.IsValid) 
             {
-                servicoAplicacaoPessoas.Cadastro(pessoasVm);
+				
+				servicoAplicacaoPessoas.Cadastro(pessoasVm);
             } 
             else
             {
-                return View(pessoasVm);
+				ViewBag.Alert = Servico.CommonServices.ShowAlert(Alerts.Danger, "Verifique os campos obrigatórios");
+				return View(pessoasVm);
             }
 
-			return RedirectToAction("Index");
+			ViewBag.Alert = Servico.CommonServices.ShowAlert(Alerts.Success, "Salvo com sucesso");
+			return View(pessoasVm);
 
 		}
+
+
 
         [HttpGet]
         public IActionResult Excluir(int id) {
@@ -63,7 +65,7 @@ namespace Aplicacao.Controllers
 		//	{
 		//		viewModel = servicoAplicacaoPessoas.CarregarRegistro(id);
 		//	}
-  //          viewModel.Status = 2;
+		//          viewModel.Status = 2;
 		//	servicoAplicacaoPessoas.Cadastro(viewModel);
 		//	return RedirectToAction("Privacy", "Home");
 		//}
@@ -75,11 +77,14 @@ namespace Aplicacao.Controllers
 		//	PessoasViewModel viewModel = new PessoasViewModel();
 		//	if (id != "")
 		//	{		
-  //              viewModel = servicoAplicacaoPessoas.CarregarRegistro(Convert.ToInt16((aux[0])));
+		//              viewModel = servicoAplicacaoPessoas.CarregarRegistro(Convert.ToInt16((aux[0])));
 		//	}
 		//	viewModel.Status = 1;
 		//	servicoAplicacaoPessoas.Cadastro(viewModel);
 		//	return RedirectToAction("Privacy", "Home", new { id = Convert.ToInt16((aux[1])) });
 		//}
+
+		
+
 	}
 }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Estudo.Models.PessoasViewModel>
 @addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @using NonFactors.Mvc.Grid;
 
 @{
@@ -11,20 +12,27 @@
 <h4>Pessoas</h4>
 <hr />
 
-<div class="row">
-	
-	<div class="col-12">
+<div class="table-responsive" >
+
+	<div class="col-md-8">
 		<div class="container">
 			<div class="text-center">
 				@(Html
 					.Grid(Model)
 					.Build(columns =>
 					{
-						columns.Add(model => model.Codigo).Titled("Codigo");
+						columns.Add(model => model.Codigo).Titled("Código");
 						columns.Add(model => model.Nome).Titled("Nome");
+
+						@*columns.Add().Titled("Nome")
+						.Encoded(false)
+						.RenderedAs(model => model.Nome + "</br> <b>CPF:" + model.Cpf + "</b>");*@
+
+						columns.Add(model => model.Cpf).Titled("CPF");
 						columns.Add(model => model.Status).Titled("Status");
-						columns.Add((model) => Html.ActionLink("", "Cadastrar", new { id = model.Codigo }, new{ @class = " fas fa-edit", style="color: #75849f; " }));
-						columns.Add((model) => Html.ActionLink("", "Excluir", new { id = model.Codigo }, new { @class = " fa fa-minus", style="color: #75849f; " }));
+						columns.Add(model => model.DataCriacao).Titled("Data de Criação");
+						columns.Add((model) => Html.ActionLink("", "Cadastrar", new { id = model.Codigo }, new { @class = " fas fa-edit", style = "color: #75849f; " }));
+						columns.Add((model) => Html.ActionLink("", "Excluir", new { id = model.Codigo }, new { @class = " fa fa-minus", style = "color: #75849f; " }));
 
 					})
 					.Filterable(GridFilterCase.Lower)
@@ -35,24 +43,24 @@
 						pager.RowsPerPage = 15;
 					})
 					.Sortable()
+
+					//.Css("table table-sm table-striped table-hover table-responsive")
 					)
 			</div>
 		</div>
 	</div>
-	
-</div>
 
-<div class="row">
-	
-	<div class="col-12">
+
+
+	<div class="col-md-8">
 		<div class="container">
 			<div class="text-right">
 
-				<input type="button" value="Novo" class="btn btn-dark" onclick="Novo();" />
+				<input type="button" value="Novo" class="btn btn-outline-secondary" onclick="Novo();" />
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 
 <script src="~/js/mvc-grid.js"></script>

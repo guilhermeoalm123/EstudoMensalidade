@@ -1,5 +1,6 @@
 ﻿@model Estudo.Models.PessoasViewModel
 @addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @using NonFactors.Mvc.Grid;
 @{
 	ViewData["Title"] = "Cadastro de Pessoas";
@@ -7,15 +8,15 @@
 	var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
 }
 
-<h4>Pessoas</h4>
+<h4 >Pessoas</h4>
 <hr />
 
 <div class="container">
 	<div class="col-2"></div>
 	<div class="col-8">
-		<form id="Pessoas" method="post" action="Cadastrar">
+		<form id="Pessoas" method="post" action="Cadastrar" class="row g-3">
 
-			<div class="row">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label>Código:</label>
 					<input type="text" asp-for="Codigo" disabled class="form-control" />
@@ -24,7 +25,7 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-10">
 				<div class="form-group">
 					<label>Nome:</label>
 					<span asp-validation-for="Nome" class="text-danger"></span>
@@ -32,7 +33,14 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>CPF:</label>
+					<input type="text" asp-for="Cpf" class="form-control" />
+				</div>
+			</div>
+
+			<div class="col-md-6">
 				<div class="form-group">
 					<label>Status:</label>
 					<select asp-for="Status" class="form-control" >
@@ -46,9 +54,9 @@
 			<hr />
 
 			<div class="container text-right ">
-				<input type="submit" value="Salvar" class="btn btn-dark" />
-				<input type="button" value="Excluir" class="btn btn-dark" onclick="Excluir(@Model.Codigo)" @disabled />
-				<input type="button" value="Voltar" class="btn btn-dark" onclick="Voltar()" />
+				<input type="submit" value="Salvar" class="btn btn-outline-secondary" />
+				<input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />
+				<input type="button" value="Voltar" class="btn btn-outline-secondary" onclick="Voltar()" />
 			</div>
 
 		</form>

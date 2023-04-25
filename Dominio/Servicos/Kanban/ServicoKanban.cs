@@ -66,7 +66,5 @@ namespace Dominio.Servicos.Kanban
 
 			return kanban;
 		}
-
-
 	}
 }

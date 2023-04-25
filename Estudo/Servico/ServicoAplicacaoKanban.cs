@@ -31,21 +31,29 @@ namespace Estudo.Servico
 			{
 				Codigo = x.Codigo,
 				Nome = x.Nome,
+				Cpf = x.Cpf,
 				Status = x.Status,
+				DataCriacao = x.DataCriacao,
 			});
 
 			var convertPessoasEmAtraso = kanban.PessoasAtraso.Select(x => new PessoasViewModel
 			{
 				Codigo = x.Codigo,
 				Nome = x.Nome,
+				Cpf = x.Cpf,
 				Status = x.Status,
+				DataCriacao = x.DataCriacao,
 			});
 
 			kanbanViewModel.ListaPessoasEmDia = convertPessoasEmDia;
 			kanbanViewModel.ListaPessoasEmAtraso = convertPessoasEmAtraso;
 			kanbanViewModel.MensalidadeCodigo = codigo;
+			if (codigo != 0)
+			{
+				kanbanViewModel.MensalidadeDataCriacao = ServicoMensalidade.ListarMensalidade(codigo).DataCriacao;
 
-			//kanbanViewModel.ListaMensalidade = (IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)kanban.Mensalidades.ToList();
+			}
+
 			List<SelectListItem> lista = new List<SelectListItem>();
 			lista.Add(new SelectListItem
 			{

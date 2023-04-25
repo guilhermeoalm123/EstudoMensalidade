@@ -1,4 +1,5 @@
-﻿using Dominio.Entidades;
+﻿using Aplicacao.Enums;
+using Dominio.Entidades;
 using Dominio.Servicos.Pessoas;
 using Estudo.Models;
 using Estudo.Servico;
@@ -47,13 +48,13 @@ namespace Aplicacao.Controllers
 			//if (ModelState.IsValid)
    //         {
                 servicoAplicacaoPagamento.Cadastro(pagamentoVm);
-            //}
-            //else
-            //{
-            //    return View(pagamentoVm);
-            //}
-
-            return RedirectToAction("Index");
+			//}
+			//else
+			//{
+			//    return View(pagamentoVm);
+			//}
+			ViewBag.Alert = Servico.CommonServices.ShowAlert(Alerts.Success, "Salvo com sucesso");
+			return RedirectToAction("Index");
 
         }
 

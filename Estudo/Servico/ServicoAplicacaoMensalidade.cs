@@ -21,7 +21,8 @@ namespace Estudo.Servico
             {
                 Codigo = mensalidadeViewModel.Codigo,
                 Descricao = mensalidadeViewModel.Descricao,
-                Valor = mensalidadeViewModel.Valor
+                Valor = mensalidadeViewModel.Valor,
+                DataCriacao = DateTime.Now
             };
 
             ServicoMensalidade.Cadastrar(mensalidade);
@@ -36,7 +37,8 @@ namespace Estudo.Servico
             {
                 Codigo = registro.Codigo,
                 Descricao = registro.Descricao,
-                Valor = registro.Valor
+                Valor = registro.Valor,
+                DataCriacao = registro.DataCriacao
             };
 
             return mensalidade;
@@ -60,7 +62,8 @@ namespace Estudo.Servico
                 {
                     Codigo = item.Codigo,
                     Descricao = item.Descricao,
-                    Valor = item.Valor
+                    Valor = item.Valor,
+                    DataCriacao = DateTime.Now
                 };
 
                 listaMensalidade.Add(mensalidade);

@@ -1,4 +1,6 @@
-﻿using Dominio.Entidades;
+﻿using Aplicacao.Enums;
+using Aplicacao.Servico;
+using Dominio.Entidades;
 using Estudo.Models;
 using Estudo.Servico;
 using Estudo.Servico.Interface;
@@ -67,6 +69,8 @@ namespace Estudo.Controllers
 			};
 			
 			ServicoAplicacaoPagamento.Cadastro(viewModel);
+
+			ViewBag.Alert = CommonServices.ShowAlert(Alerts.Success, "Pagamento cadastrado!");
 			return RedirectToAction("Privacy", "Home", new { id = Convert.ToInt16((aux[1])) });
 		}
 
@@ -83,6 +87,7 @@ namespace Estudo.Controllers
                 
 
 			ServicoAplicacaoPagamento.Excluir((int)viewModel.Codigo);
+			ViewBag.Alert = CommonServices.ShowAlert(Alerts.Success, "Pagamento Excluido!");
 			return RedirectToAction("Privacy", "Home", new { id = Convert.ToInt16((aux[1])) });
 		}
 

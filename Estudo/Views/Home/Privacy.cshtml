@@ -11,92 +11,136 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quadro de Pagamento</title>
 
+<style type="text/css">
+
+
+	.card-body {
+		padding: 0rem !important;
+		padding-left: 0.5rem !important;
+		padding-right: 0.5rem !important;
+	}
+
+	.panel-body {
+		padding: 15px 0 0 0;
+		overflow-y: auto;
+		
+		
+	}
+
+	.kanban-col {
+		width: 300px;
+		margin-right: 20px;
+		float: left;
+	}
+
+	
+		
+
+</style>
+
 <!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+@*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+@*<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">*@
 <!-- Ekko Lightbox -->
-<link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">
+@*<link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">*@
 <!-- Theme style -->
-<link rel="stylesheet" href="../dist/css/adminlte.min.css">
+@*<link rel="stylesheet" href="../dist/css/adminlte.min.css">*@
 <!-- overlayScrollbars -->
-<link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+@*<link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">*@
 
 <h4>@ViewData["Title"]</h4>
 
-<form id="kanban" method="post" action="Privacy">
-	<select asp-for="MensalidadeCodigo" value="@Model.MensalidadeCodigo" class="form-control" asp-items="@Model.ListaMensalidade" onchange="recarregar();"></select>
+<form id="kanban" method="post" action="Privacy" class="row g-3">
+	<div class="col-md-4">
+		<select asp-for="MensalidadeCodigo" value="@Model.MensalidadeCodigo" class="form-control" asp-items="@Model.ListaMensalidade" onchange="recarregar();"></select>
+	</div>
 </form>
 <hr />
 
 @if (Model.MensalidadeCodigo != 0)
 {
-	<!--Primeira Coluna-->
-	<div class="panel panel-primary kanban-col">
-		<div class="card card-row card-primary">
+	<div class="panel-body">
+		<!--Primeira Coluna-->
+		<div class="panel panel-primary kanban-col">
+			<div class="card card-row card-primary">
 
-			<div class="card-header">
-				<h3 class="card-title">Sem Pagamento</h3>
-			</div>
+				<div class="card-header">
+					<h3 class="card-title">Sem Pagamento</h3>
+				</div>
 
-			<div class="panel-body">
-				<div id="TODO" class="kanban-entry">
-					@foreach (var item in Model.ListaPessoasEmAtraso.OrderBy(x => x.Nome))
-					{
-						if (item.Status == 1){
-							<article class="kanban-entry grab" id=@item.Codigo draggable="true">
-								<div class="card-body">
-									<div class="card card-primary card-outline">
-										<div class="card-header">
-											@item.Nome
-											<div class="card-tools">
-												@*<a href="#" class="btn btn-tool btn-link">#5</a>*@
-												<a href="../../Pessoas/Cadastrar/@item.Codigo" class="btn btn-tool">
-													<i class="fas fa-pen"></i>
-												</a>
+				<div class="panel-body">
+					<div id="TODO" class="kanban-entry">
+						@foreach (var item in Model.ListaPessoasEmAtraso.OrderBy(x => x.Nome))
+						{
+							// Mostrar Status Ativo e criados antes do mês da mensalidade
+							if (item.Status == 1 && item.DataCriacao <= Model.MensalidadeDataCriacao)
+							{
+								<article class="kanban-entry grab" id=@item.Codigo draggable="true">
+									<div class="card-body">
+										<div class="card card-primary card-outline">
+											<div class="card-header">
+												@item.Nome
+												<div class="card-tools">
+
+													<a href="../../Home/CadastrarPagamento/@item.Codigo;@Model.MensalidadeCodigo" class="btn btn-tool">
+														<i class="fas fa-arrow-right"></i>
+													</a>
+
+													<a href="../../Pessoas/Cadastrar/@item.Codigo" class="btn btn-tool">
+														<i class="fas fa-pen"></i>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</article>
+								</article>
+							}
 						}
-					}
+					</div>
 				</div>
-			</div>
 
+			</div>
 		</div>
-	</div>
 
-	<!-- Segunda Coluna-->
-	<div class="panel panel-default kanban-col">
-		<div class="card card-row card-primary">
-			<div class="card-header bg-info">
-				<h3 class="card-title">Em dia</h3>
-			</div>
-			<div class="panel-body">
-				<div id="DOING" class="kanban-entry">
-					@foreach (var item in Model.ListaPessoasEmDia.OrderBy(x => x.Nome)){
-						if (item.Status == 1){
-							<article class="kanban-entry grab" id=@item.Codigo draggable="true">
-								<div class="card-body">
-									<div class="card card-primary card-outline">
-										<div class="card-header">
-											@item.Nome
-											<div class="card-tools">
-												@*<a href="#" class="btn btn-tool btn-link">#5</*@
-												<a href="../../Pessoas/Cadastrar/@item.Codigo" class="btn btn-tool">
-													<i class="fas fa-pen"></i>
-												</a>
+		<!-- Segunda Coluna-->
+		<div class="panel panel-default kanban-col">
+			<div class="card card-row card-primary">
+				<div class="card-header bg-info">
+					<h3 class="card-title">Em dia</h3>
+				</div>
+				<div class="panel-body">
+					<div id="DOING" class="kanban-entry">
+						@foreach (var item in Model.ListaPessoasEmDia.OrderBy(x => x.Nome))
+						{
+							// Mostrar Status Ativo e criados antes do mês da mensalidade
+							if (item.Status == 1 && item.DataCriacao <= Model.MensalidadeDataCriacao)
+							{
+								<article class="kanban-entry grab" id=@item.Codigo draggable="true">
+									<div class="card-body">
+										<div class="card card-primary card-outline">
+											<div class="card-header">
+												@item.Nome
+												<div class="card-tools">
+
+													<a href="../../Home/ExcluirPagamento/@item.Codigo;@Model.MensalidadeCodigo" class="btn btn-tool">
+														<i class="fas fa-arrow-left"></i>
+													</a>
+
+													<a href="../../Pessoas/Cadastrar/@item.Codigo" class="btn btn-tool">
+														<i class="fas fa-pen"></i>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</article>
+								</article>
+							}
 						}
-					}
+					</div>
 				</div>
-			</div>
 
+			</div>
 		</div>
 	</div>
 }

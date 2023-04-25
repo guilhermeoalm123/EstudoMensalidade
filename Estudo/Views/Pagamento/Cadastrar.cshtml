@@ -13,9 +13,9 @@
 <div class="container">
 	<div class="col-2"></div>
 	<div class="col-8">
-		<form id="Pagamento" method="post" action="Cadastrar">
+		<form id="Pagamento" method="post" action="Cadastrar" class="row g-3">
 
-			<div class="row">
+			<div class="col-md2">
 				<div class="form-group">
 					<label>Código:</label>
 					<input type="text" asp-for="Codigo" disabled class="form-control" />
@@ -23,14 +23,16 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-10"></div>
+
+			<div class="col-md-6">
 				<div class="form-group">
 					<label>Nome:</label>
 					<select asp-for="PessoasCodigo" value="@Model.PessoasCodigo" class="form-control" asp-items="@Model.ListaPessoa"></select>
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label>Mensalidade:</label>
 					<select asp-for="MensalidadeCodigo" value="@Model.MensalidadeCodigo" class="form-control" asp-items="@Model.ListaMensalidade"></select>
@@ -41,9 +43,9 @@
 			<hr />
 
 			<div class="container text-right ">
-				<input type="submit" value="Salvar" class="btn btn-dark" />
-				<input type="button" value="Excluir" class="btn btn-dark" onclick="Excluir(@Model.Codigo)" @disabled />
-				<input type="button" value="Voltar" class="btn btn-dark" onclick="Voltar()" />
+				<input type="submit" value="Salvar" class="btn btn-outline-secondary" />
+				<input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />
+				<input type="button" value="Voltar" class="btn btn-outline-secondary" onclick="Voltar()" />
 			</div>
 
 		</form>

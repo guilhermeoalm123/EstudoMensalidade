@@ -11,6 +11,11 @@ namespace Estudo.Models
         [Required(ErrorMessage ="*")]
         public string Nome { get; set; }
 
+		public string Cpf { get; set; }
+
 		public int Status { get; set; }
+
+		public DateTime DataCriacao { get; set; }
+
 	}
 }

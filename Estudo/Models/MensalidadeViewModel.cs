@@ -13,5 +13,8 @@ namespace Estudo.Models
 
 		public decimal Valor { get; set; }
 		public byte Ativo { get; set; }
+		public DateTime? DataCriacao { get; set; }
+
+
 	}
 }

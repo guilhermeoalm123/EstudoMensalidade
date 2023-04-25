@@ -12,7 +12,11 @@ namespace Dominio.Entidades
         
         public string Nome { get; set; }
 
+		public string? Cpf { get; set; }
+
 		public int Status { get; set; }
+
+		public DateTime DataCriacao { get; set; }
 
 		public virtual ICollection<Pagamento> Pagamento { get; set; }
 	}

@@ -318,10 +318,12 @@ img {
     float: left;
 }
 
-.panel-body {
-    padding: 15px 0 0 0;
-    overflow-y: auto;
-}
+    .panel-body {
+        background: black;
+        padding: 15px 0 0 0;
+        overflow-y: scroll;
+        height: 200px;
+    }
 
 
 

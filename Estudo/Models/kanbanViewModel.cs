@@ -11,5 +11,7 @@ namespace Estudo.Models
 		public IEnumerable<PessoasViewModel> ListaPessoasEmAtraso { get; set; }
 
 		public int MensalidadeCodigo { get; set; }
+
+		public DateTime? MensalidadeDataCriacao { get; set; }
 	}
 }

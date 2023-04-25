@@ -11,21 +11,23 @@
 <h4>Pagamentos</h4>
 <hr />
 
-<div class="row">
+<div class="table-responsive">
 	
-	<div class="col-12">
+	<div class="col-md-8">
 		<div class="container">
 			<div class="text-center">
-				@(Html
-					.Grid(Model)
-					.Build(columns =>
-					{
-						columns.Add(model => model.Codigo).Titled("Codigo");
+				@(
+					Html
+						.Grid(Model)
+						.Build(columns =>
+						{
+						columns.Add(model => model.Codigo).Titled("Código");
 						columns.Add(model => model.PessoasNome).Titled("Nome");
 						columns.Add(model => model.MensalidadeDescricao).Titled("Mensalidade");
-						columns.Add((model) => Html.ActionLink("", "Cadastrar", new { id = model.Codigo }, new{ @class = " fas fa-edit", style="color: #75849f; " }));
-						columns.Add((model) => Html.ActionLink("", "Excluir", new { id = model.Codigo }, new { @class = " fa fa-minus", style="color: #75849f; " }));
-
+						
+						columns.Add((model) => Html.ActionLink("", "Cadastrar", new { id = model.Codigo }, new { @class = " fas fa-edit", style = "color: #75849f; " }));
+						columns.Add((model) => Html.ActionLink("", "Excluir", new { id = model.Codigo }, new { @class = " fa fa-minus", style = "color: #75849f; " }));
+							
 					})
 					.Filterable(GridFilterCase.Lower)
 					.Using(GridFilterMode.Excel)
@@ -40,15 +42,13 @@
 		</div>
 	</div>
 	
-</div>
 
-<div class="row">
 	
-	<div class="col-12">
+	<div class="col-8">
 		<div class="container">
 			<div class="text-right">
 
-				<input type="button" value="Novo" class="btn btn-dark" onclick="Novo();" />
+				<input type="button" value="Novo" class="btn btn-outline-secondary" onclick="Novo();" />
 			</div>
 		</div>
 	</div>

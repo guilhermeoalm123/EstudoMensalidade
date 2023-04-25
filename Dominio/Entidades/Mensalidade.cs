@@ -15,6 +15,8 @@ namespace Dominio.Entidades
 		public decimal Valor { get; set; }
 		public byte Ativo { get; set; }
 
+		public DateTime? DataCriacao { get; set; }
+
 		ICollection<Pagamento> Pagamentos { get; set; }
 	}
 }

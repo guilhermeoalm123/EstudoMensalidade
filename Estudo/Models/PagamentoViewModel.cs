@@ -18,7 +18,7 @@ namespace Estudo.Models
 		public int MensalidadeCodigo { get; set; }
 		//public Mensalidade Mensalidade { get; set; }
 		public string MensalidadeDescricao { get; set; }
-
+		
 		public IEnumerable<SelectListItem> ListaMensalidade { get; set; }
 
 	}

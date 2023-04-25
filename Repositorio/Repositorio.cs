@@ -36,11 +36,17 @@ namespace Repositorio
 
         public void Delete(int ID)
         {
+            try { 
             var ent = new TEntidade { Codigo = ID };
             dbSetContext.Attach(ent);
             dbSetContext.Remove(ent);
             Db.SaveChanges();
-        }
+			}catch (Exception ex)
+            {
+				
+			}
+
+		}
 
         public TEntidade Read(int ID)
         {    
