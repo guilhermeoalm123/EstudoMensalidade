@@ -11,6 +11,14 @@
 <h4>Mensalidades</h4>
 <hr />
 
+@*<form id="kanban" method="post" action="Privacy" class="row g-3">
+	<div class="col-md-4">
+		<select asp-for="MensalidadeCodigo" value="@Model.MensalidadeCodigo" class="form-control" asp-items="@Model.ListaMensalidade" onchange="recarregar();"></select>
+	</div>
+</form>*@
+
+<hr/>
+
 <div class="table-responsive">
 	<div class="col-md-8">
 		<div class="container">
