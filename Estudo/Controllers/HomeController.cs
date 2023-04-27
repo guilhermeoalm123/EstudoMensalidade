@@ -70,7 +70,7 @@ namespace Estudo.Controllers
 			
 			ServicoAplicacaoPagamento.Cadastro(viewModel);
 
-			ViewBag.Alert = CommonServices.ShowAlert(Alerts.Success, "Pagamento cadastrado!");
+			//ViewBag.Alert = CommonServices.ShowAlert(Alerts.Success, "Pagamento cadastrado!");
 			return RedirectToAction("Privacy", "Home", new { id = Convert.ToInt16((aux[1])) });
 		}
 
@@ -81,9 +81,10 @@ namespace Estudo.Controllers
 			string[] aux = id.Split(";");
 
             PagamentoViewModel viewModel = new PagamentoViewModel();
-            viewModel = (PagamentoViewModel)ServicoAplicacaoPagamento.ListaPagamento()
-						.FirstOrDefault(x => x.MensalidadeCodigo == Convert.ToInt16(aux[1])
-							&& x.PessoasCodigo == Convert.ToInt16((aux[0])));
+            viewModel = ServicoAplicacaoPagamento.ListaPagamento().ToList().Where(
+							x => x.MensalidadeCodigo == Convert.ToInt16(aux[1])
+							&& x.PessoasCodigo == Convert.ToInt16((aux[0]))
+                ).FirstOrDefault();
                 
 
 			ServicoAplicacaoPagamento.Excluir((int)viewModel.Codigo);

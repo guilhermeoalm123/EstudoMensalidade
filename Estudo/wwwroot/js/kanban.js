@@ -32,10 +32,11 @@ function draggableInit() {
         if (sourceId != targetId) {
             var elementId = event.originalEvent.dataTransfer.getData("text/plain");
 
-            
-            if (targetId == "DOING") {
+            alert(targetId);
+            if (targetId == "DOING" && targetId != "undefined") {
                 window.location = window.origin + "\\Home\\CadastrarPagamento\\" + elementId + ";" + $("#MensalidadeCodigo option:selected").val();
-            } else {
+            } 
+                if (targetId == "TODO" && targetId != "undefined") {
                 window.location = window.origin + "\\Home\\ExcluirPagamento\\" + elementId + ";" + $("#MensalidadeCodigo option:selected").val();
             }
             

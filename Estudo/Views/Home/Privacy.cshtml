@@ -20,11 +20,16 @@
 		padding-right: 0.5rem !important;
 	}
 
-	.panel-body {
+	.panel-body-kanban {
 		padding: 15px 0 0 0;
 		overflow-y: auto;
 		
 		
+	}
+
+	.panel-body {
+		padding: 15px 0 0 0;
+		overflow-y: auto;
 	}
 
 	.kanban-col {
@@ -60,7 +65,7 @@
 
 @if (Model.MensalidadeCodigo != 0)
 {
-	<div class="panel-body">
+	<div class="panel-body-kanban">
 		<!--Primeira Coluna-->
 		<div class="panel panel-primary kanban-col">
 			<div class="card card-row card-primary">
@@ -164,6 +169,7 @@
 <script>
 	function recarregar() {
 		window.location = window.origin + "\\Home\\Privacy\\" + $("#MensalidadeCodigo option:selected").val();
+		
 	}
 </script>
 
