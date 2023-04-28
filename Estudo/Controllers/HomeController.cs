@@ -81,10 +81,8 @@ namespace Estudo.Controllers
 			string[] aux = id.Split(";");
 
             PagamentoViewModel viewModel = new PagamentoViewModel();
-            viewModel = ServicoAplicacaoPagamento.ListaPagamento().ToList().Where(
-							x => x.MensalidadeCodigo == Convert.ToInt16(aux[1])
-							&& x.PessoasCodigo == Convert.ToInt16((aux[0]))
-                ).FirstOrDefault();
+            viewModel = ServicoAplicacaoPagamento.ListaPagamento().ToList().FirstOrDefault(x => x.MensalidadeCodigo == Convert.ToInt16(aux[1])
+							&& x.PessoasCodigo == Convert.ToInt16((aux[0])));
                 
 
 			ServicoAplicacaoPagamento.Excluir((int)viewModel.Codigo);

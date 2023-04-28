@@ -9,8 +9,9 @@ namespace Repositorio.Contexto
         public Microsoft.EntityFrameworkCore.DbSet<Pessoas> Pessoas { get; set; }
 		public Microsoft.EntityFrameworkCore.DbSet<Mensalidade> Mensalidade { get; set; }
 		public Microsoft.EntityFrameworkCore.DbSet<Pagamento> Pagamento { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Usuario> Usuario { get; set; }
 
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
 			
 		}
 

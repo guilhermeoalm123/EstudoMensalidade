@@ -1,0 +1,39 @@
+﻿@model Estudo.Models.LoginViewModel
+
+@{
+	ViewData["Title"] = "Login";
+	Layout = null;
+}
+
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="~/css/login.css" rel="stylesheet" />
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="./img/AdminLTELogo.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form asp-controller="Login" asp-action="index">
+            <input asp-for="Email" type="text" class="fadeIn second" placeholder="login">
+            <input asp-for="Senha" type="password" class="fadeIn third" placeholder="password">
+            <br />
+            <span style="color:red;">@ViewData["Erro"]</span>
+            <br />
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+        
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Esqueceu a senha?</a>
+        </div>
+
+    </div>
+</div>

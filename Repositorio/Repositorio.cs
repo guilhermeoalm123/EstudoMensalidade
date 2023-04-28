@@ -48,7 +48,7 @@ namespace Repositorio
 
 		}
 
-        public TEntidade Read(int ID)
+        public virtual TEntidade Read(int ID)
         {    
             return dbSetContext.Where(x => x.Codigo == ID).FirstOrDefault();
         }

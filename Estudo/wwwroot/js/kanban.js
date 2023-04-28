@@ -32,7 +32,7 @@ function draggableInit() {
         if (sourceId != targetId) {
             var elementId = event.originalEvent.dataTransfer.getData("text/plain");
 
-            alert(targetId);
+            
             if (targetId == "DOING" && targetId != "undefined") {
                 window.location = window.origin + "\\Home\\CadastrarPagamento\\" + elementId + ";" + $("#MensalidadeCodigo option:selected").val();
             } 
