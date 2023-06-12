@@ -44,11 +44,11 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 builder.Services.AddDbContext<Repositorio.Contexto.ApplicationDbContext>(options =>
 {
-	options.UseSqlServer("server=.;DataBase=teste;Trusted_Connection=True;MultipleActiveResultSets=True;Encrypt=False");
+	options.UseSqlServer("server=.;DataBase=teste;Trusted_Connection=True;MultipleActiveResultSets=True;Encrypt=False", b => b.MigrationsAssembly("Aplicacao"));
 	options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 
 var app = builder.Build();
@@ -61,9 +61,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();

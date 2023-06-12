@@ -1,7 +1,11 @@
-﻿using Aplicacao.Helpers;
+﻿using Aplicacao.Enums;
+using Aplicacao.Helpers;
+using Dominio.Entidades;
 using Estudo.Models;
 using Estudo.Servico.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 
 namespace Aplicacao.Controllers
 {
@@ -9,17 +13,24 @@ namespace Aplicacao.Controllers
 	public class LoginController : Controller
 	{
         readonly IServicoAplicacaoUsuario servicoAplicacaoUsuario;
+        readonly IHttpContextAccessor HttpContexto;
 
-		public LoginController(IServicoAplicacaoUsuario ServicoAplicacaoUsuario)
+        public LoginController(IServicoAplicacaoUsuario ServicoAplicacaoUsuario, IHttpContextAccessor httpContexto)
 		{
 			servicoAplicacaoUsuario	= ServicoAplicacaoUsuario;
+            HttpContexto = httpContexto;
 		}
 
-        public IActionResult Index()
+        public IActionResult Index(int? id)
 		{
+			if (id == 0)
+			{
+				HttpContexto.HttpContext.Session.Clear();
+			}
 			return View();
 		}
-		[HttpPost]
+        
+        [HttpPost]
         public IActionResult Index(LoginViewModel model)
         {
 			ViewData["Erro"] = string.Empty;
@@ -35,6 +46,11 @@ namespace Aplicacao.Controllers
                     ViewData["Erro"] = "Dados incorretos!";
                     return View(model);
                 }
+                else
+				{
+                    HttpContexto.HttpContext.Session.SetInt32(Sessao.Logado, 1);
+					HttpContexto.HttpContext.Session.SetString(Sessao.Email, model.Email);
+				}
             }
 			else
 			{
@@ -44,5 +60,7 @@ namespace Aplicacao.Controllers
             return RedirectToAction("index","home");
 
         }
+
+		
     }
 }

@@ -60,6 +60,9 @@
 	<div class="col-md-4">
 		<select asp-for="MensalidadeCodigo" value="@Model.MensalidadeCodigo" class="form-control" asp-items="@Model.ListaMensalidade" onchange="recarregar();"></select>
 	</div>
+	<div class="col-md-4">
+		
+	</div>
 </form>
 <hr />
 
@@ -71,7 +74,8 @@
 			<div class="card card-row card-primary">
 
 				<div class="card-header">
-					<h3 class="card-title">Sem Pagamento</h3>
+					<h3 class="card-title">Sem Pagamento</h3>&ensp;
+					<a href="../Excel/@Model.MensalidadeCodigo"><img src="~/img/excel.png" width="20px" alt="Exportar Excel" /></a>
 				</div>
 
 				<div class="panel-body">
@@ -148,9 +152,9 @@
 			</div>
 		</div>
 	</div>
+
+	
 }
-
-
 
 <!-- Modal -->
 <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
@@ -168,8 +172,7 @@
 
 <script>
 	function recarregar() {
-		window.location = window.origin + "\\Home\\Privacy\\" + $("#MensalidadeCodigo option:selected").val();
-		
+		window.location = window.origin + "\\Home\\Privacy\\" + $("#MensalidadeCodigo option:selected").val();	
 	}
 </script>
 

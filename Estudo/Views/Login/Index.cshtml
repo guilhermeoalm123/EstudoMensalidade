@@ -17,7 +17,13 @@
         <!-- Tabs Titles -->
         <!-- Icon -->
         <div class="fadeIn first">
-            <img src="./img/AdminLTELogo.png" id="icon" alt="User Icon" />
+            <img src="~/img/AdminLTELogo.png" id="icon" alt="User Icon" />
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                @Html.Raw(@ViewBag.Alert)     
+            </div>
         </div>
 
         <!-- Login Form -->
@@ -31,9 +37,25 @@
         </form>
         
         <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Esqueceu a senha?</a>
-        </div>
+        @*<div id="formFooter">
+            <a class="underlineHover" data-toggle="modal" data-target="#confirm" >Esqueceu a senha?</a>
+        </div>*@
+
+        @*<div class="modal fade" id="confirm" role="dialog">
+            <div class="modal-dialog modal-md">
+
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Para cadastrar uma nova senha entre em contato com o administrador do sistema!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-secondary">Cancelar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
 
     </div>
 </div>

@@ -1,10 +1,10 @@
-﻿@model Estudo.Models.MensalidadeViewModel
+﻿@model Estudo.Models.GerarPagamentoViewModel
 @addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
 @using NonFactors.Mvc.Grid;
 @{
 	ViewData["Title"] = "Cadastro de Mensalidade";
 	Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
-	var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
+	//var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
 }
 
 <h4>Cadastro de Mensalidade</h4>
@@ -15,26 +15,27 @@
 	<div class="col-8">
 		<form id="Pessoas" method="post" action="Cadastrar" class="row g-3">
 
-			<div class="col-md-2">
-				<div class="form-group">
-					<label>Código:</label>
-					<input type="text" asp-for="Codigo" disabled class="form-control" />
-					<input type="hidden" asp-for="Codigo" class="form-control" />
-				</div>
-			</div>
+			
 
 			<div class="col-md-10">
 				<div class="form-group">
-					<label>Descrição:</label>
-					<span asp-validation-for="Descricao" class="text-danger"></span>
-					<input type="text" asp-for="Descricao" class="form-control" />
+					<label>Quantidade de recorrências:</label>
+					<span asp-validation-for="Recorrencia" class="text-danger"></span>
+					<input type="text" asp-for="Recorrencia" class="form-control" />
 				</div>
 			</div>
 
 			<div class="col-md-6">
 				<div class="form-group">
-					<label>Valor:</label>
-					<input type="text" asp-for="Valor" class="form-control" />
+					<label>Data da primeira mensalidade:</label>
+					<input type="datetime" asp-for="DataInicio" class="form-control" />
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>Prefixo:</label>
+					<input type="text" asp-for="Prefixo" class="form-control" />
 				</div>
 			</div>
 
@@ -42,9 +43,8 @@
 
 			<div class="container text-right ">
 				<input type="submit" value="Salvar" class="btn btn-outline-secondary" />
-				<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#confirm" @disabled>Excluir</button>
-				@*<input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />*@
-				<input type="button" value="Voltar" class="btn btn-outline-secondary" onclick="Voltar()" />
+				@*<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#confirm" @disabled>Excluir</button>
+				*@<input type="button" value="Voltar" class="btn btn-outline-secondary" onclick="Voltar()" />
 			</div>
 
 			
@@ -56,8 +56,8 @@
 							<p> QUER REALMENTE FAZER ISSO?? NÃO POR FAVOR, EU TENHO FILHOS</p>
 						</div>
 						<div class="modal-footer">
-							<input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />
-							<button type="button" data-dismiss="modal" class="btn btn-outline-secondary">Cancelar</button>
+							@*<input type="button" value="Excluir" class="btn btn-outline-secondary" onclick="Excluir(@Model.Codigo)" @disabled />
+							*@<button type="button" data-dismiss="modal" class="btn btn-outline-secondary">Cancelar</button>
 						</div>
 					</div>
 

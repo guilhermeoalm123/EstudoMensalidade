@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Enums;
 using Aplicacao.Servico;
+using ClosedXML.Excel;
 using Dominio.Entidades;
 using Estudo.Models;
 using Estudo.Servico;
@@ -94,6 +95,39 @@ namespace Estudo.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Excel(int id)
+        {
+            kanbanViewModel kanban = new kanbanViewModel();
+            kanban = servicoAplicacaoKanban.ListarKanban(id);
+            IEnumerable<PessoasViewModel> pessoas = (IEnumerable<PessoasViewModel>)kanban.ListaPessoasEmAtraso;
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Pessoas");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "Código";
+                worksheet.Cell(currentRow, 2).Value = "Nome";
+                worksheet.Cell(currentRow, 3).Value = "CPF";
+                foreach (var user in pessoas)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = user.Codigo;
+                    worksheet.Cell(currentRow, 2).Value = user.Nome;
+                    worksheet.Cell(currentRow, 3).Value = user.Cpf;
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+
+                    return File(
+                        content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "mens-" + id.ToString() + "-" + DateTimeOffset.Now + ".xlsx");
+                }
+            }
         }
     }
 }
